@@ -130,11 +130,17 @@ forEach((link)=>{
   let productId = link.dataset.productId
   let container = document.querySelector(`.js-cart-item-container-${productId}`)
   container.classList.remove(`show`)
+  
   let quantityInput = document.querySelector(`.js-quantity-input-${productId}`)
   let newQuantity = Number(quantityInput.value)
+  if (newQuantity < 1 || newQuantity >= 1000) {
+    alert('Quantity must be at least 1 and less than 1000');
+    return;
+  }
   Quantity(productId,newQuantity)
   let quantityLabel = document.querySelector(`.js-quantity-label-${productId}`)
   quantityLabel.innerHTML = newQuantity
   UpdateCartQuantity()
+  
  })
 })
