@@ -61,6 +61,7 @@ function displayCartQuantity(){
     let cartQuantity = updateCartQuantity()
     document.querySelector(`.js-cart-quantity`).innerHTML = cartQuantity
 }
+displayCartQuantity()
 
 document.querySelectorAll(`.js-add-to-cart-button`).
 forEach((button)=>{
