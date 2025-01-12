@@ -54,3 +54,14 @@ export function removeFromCart(productId){
   cart = newCart
   SaveToStorage()
 }
+
+export function Quantity(productId,newQuantity){
+  let matchingItem
+  cart.forEach((item)=>{
+    if(productId === item.productId){
+        matchingItem = item
+    }
+  })
+  matchingItem.quantity = newQuantity
+  SaveToStorage()
+}
