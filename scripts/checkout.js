@@ -3,6 +3,7 @@ import {products} from "../data/products.js"
 import {deliveryOptions} from "../scripts/deliveryOptions.js"
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"
 
+function render(){
 let checkoutHtml = ''
 
 cart.forEach((item)=>{
@@ -109,7 +110,7 @@ forEach((link)=>{
 
  let {productId,deliveryOptionId} = link.dataset
   updateDeliveryOption(productId,deliveryOptionId)
-
+  render()
  })
 }) 
 
@@ -164,3 +165,5 @@ forEach((link)=>{
   
  })
 })
+}
+render()
