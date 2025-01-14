@@ -223,6 +223,10 @@
    display: none;
 }
 
+.show .quantity-label{
+  display: none;
+}
+
 .show .quantity-input{
   display: initial;
 }
