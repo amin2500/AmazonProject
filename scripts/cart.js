@@ -68,3 +68,15 @@ export function Quantity(productId,newQuantity){
   matchingItem.quantity = newQuantity
   SaveToStorage()
 }
+
+export function updateDeliveryOption(productId,deliveryOptionId){
+  let matchingItem
+  cart.forEach((item)=>{
+    if(productId === item.productId){
+       matchingItem = item
+    }
+  })
+  matchingItem.deliveryOptionId  = deliveryOptionId
+  SaveToStorage()
+}
+

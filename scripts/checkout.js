@@ -1,4 +1,4 @@
-import {cart,removeFromCart,updateCartQuantity,Quantity} from "../scripts/cart.js"
+import {cart,removeFromCart,updateCartQuantity,Quantity,updateDeliveryOption} from "../scripts/cart.js"
 import {products} from "../data/products.js"
 import {deliveryOptions} from "../scripts/deliveryOptions.js"
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"
@@ -14,10 +14,24 @@ cart.forEach((item)=>{
           matchingItem = product
         }
     })
+
+    let deliveryOptionId = item.deliveryOptionId
+
+    let deliveryOption
+    deliveryOptions.forEach((option)=>{
+      if(deliveryOptionId === option.id){
+        deliveryOption = option
+      }
+    })
+  
+    let today = dayjs()
+    let deliveryDate = today.add(deliveryOption.deliveryDate, `days`)
+    let datestring = deliveryDate.format(`dddd MMMM D`)
+
     checkoutHtml+= `
      <div class="cart-item-container js-cart-item-container-${matchingItem.id}">
             <div class="delivery-date">
-              Delivery date: Tuesday, June 21
+              Delivery date: ${datestring}
             </div>
 
             <div class="cart-item-details-grid">
@@ -70,7 +84,7 @@ function deliveryOptionHtml(matchingItem,item){
     let isChecked = deliveryOption.id === item.deliveryOptionId
 
     html+= `
-     <div class="delivery-option">
+     <div class="delivery-option js-delivery-option" data-product-id="${matchingItem.id}" data-delivery-option-id="${deliveryOption.id}">
                   <input type="radio"
                   ${isChecked ? `checked` : ``}
                     class="delivery-option-input"
@@ -88,6 +102,16 @@ function deliveryOptionHtml(matchingItem,item){
   })
   return html
 }
+
+document.querySelectorAll(`.js-delivery-option`).
+forEach((link)=>{
+ link.addEventListener(`click`,()=>{
+
+ let {productId,deliveryOptionId} = link.dataset
+  updateDeliveryOption(productId,deliveryOptionId)
+
+ })
+}) 
 
 
 function UpdateCartQuantity(){
