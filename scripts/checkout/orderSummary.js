@@ -2,6 +2,7 @@ import {cart,removeFromCart,updateCartQuantity,Quantity,updateDeliveryOption} fr
 import {products} from "../../data/products.js"
 import {deliveryOptions} from "../../scripts/deliveryOptions.js"
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"
+import {renderPaymentSummary} from "../checkout/paymentSummary.js"
 
 export function render(){
 let checkoutHtml = ''
@@ -9,11 +10,12 @@ let checkoutHtml = ''
 cart.forEach((item)=>{
     let productId = item.productId
 
+    
     let matchingItem
     products.forEach((product)=>{
-        if(productId === product.id){
-          matchingItem = product
-        }
+      if(productId === product.id){
+        matchingItem = product
+      }
     })
 
     let deliveryOptionId = item.deliveryOptionId
@@ -111,6 +113,7 @@ forEach((link)=>{
  let {productId,deliveryOptionId} = link.dataset
   updateDeliveryOption(productId,deliveryOptionId)
   render()
+  renderPaymentSummary()
  })
 }) 
 
@@ -132,6 +135,7 @@ forEach((link)=>{
     let container = document.querySelector(`.js-cart-item-container-${productId}`)
     container.remove()
     UpdateCartQuantity()
+    renderPaymentSummary()
  })
 })
 
@@ -162,7 +166,7 @@ forEach((link)=>{
   let quantityLabel = document.querySelector(`.js-quantity-label-${productId}`)
   quantityLabel.innerHTML = newQuantity
   UpdateCartQuantity()
-  
+  renderPaymentSummary()
  })
 })
 }
