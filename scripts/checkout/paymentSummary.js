@@ -1,5 +1,5 @@
 import {products,getproduct} from "../../data/products.js"
-import {cart} from "../../scripts/cart.js"
+import {cart,updateCartQuantity} from "../../scripts/cart.js"
 import {deliveryOptions,getdeliveryOption} from "../../scripts/deliveryOptions.js"
  
 export function renderPaymentSummary(){
@@ -23,6 +23,8 @@ export function renderPaymentSummary(){
 let totalBeforeTaxCents = productPriceCents + shippingPriceCents
 let taxCents = totalBeforeTaxCents * 0.1  
 let toalCents = totalBeforeTaxCents + taxCents
+
+
     
     let paymentHtml = `
      <div class="payment-summary-title">
@@ -30,7 +32,7 @@ let toalCents = totalBeforeTaxCents + taxCents
           </div>
 
           <div class="payment-summary-row">
-            <div>Items (3):</div>
+            <div>Items (${updateCartQuantity()}):</div>
             <div class="payment-summary-money">$${(productPriceCents/100).toFixed(2)}</div>
           </div>
 
