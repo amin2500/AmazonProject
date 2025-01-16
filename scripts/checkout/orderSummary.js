@@ -1,6 +1,6 @@
 import {cart,removeFromCart,updateCartQuantity,Quantity,updateDeliveryOption} from "../../scripts/cart.js"
-import {products} from "../../data/products.js"
-import {deliveryOptions} from "../../scripts/deliveryOptions.js"
+import {products,getproduct} from "../../data/products.js"
+import {deliveryOptions,getdeliveryOption} from "../../scripts/deliveryOptions.js"
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"
 import {renderPaymentSummary} from "../checkout/paymentSummary.js"
 
@@ -11,21 +11,11 @@ cart.forEach((item)=>{
     let productId = item.productId
 
     
-    let matchingItem
-    products.forEach((product)=>{
-      if(productId === product.id){
-        matchingItem = product
-      }
-    })
+    let matchingItem = getproduct(productId)
 
     let deliveryOptionId = item.deliveryOptionId
 
-    let deliveryOption
-    deliveryOptions.forEach((option)=>{
-      if(deliveryOptionId === option.id){
-        deliveryOption = option
-      }
-    })
+    let deliveryOption = getdeliveryOption(deliveryOptionId)
   
     let today = dayjs()
     let deliveryDate = today.add(deliveryOption.deliveryDate, `days`)

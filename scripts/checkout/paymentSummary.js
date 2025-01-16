@@ -1,6 +1,6 @@
-import {products} from "../../data/products.js"
+import {products,getproduct} from "../../data/products.js"
 import {cart} from "../../scripts/cart.js"
-import {deliveryOptions} from "../../scripts/deliveryOptions.js"
+import {deliveryOptions,getdeliveryOption} from "../../scripts/deliveryOptions.js"
  
 export function renderPaymentSummary(){
 
@@ -11,23 +11,11 @@ export function renderPaymentSummary(){
         let productId = item.productId
         
         
-        let matchingItem
-        products.forEach((product)=>{
-         if(product.id === productId){
-            matchingItem = product
-         }
-         
-        
-        })
+        let matchingItem = getproduct(productId)
         
     
     let deliveryOptionId = item.deliveryOptionId
-    let deliveryOption
-    deliveryOptions.forEach((option)=>{
-      if(deliveryOptionId === option.id){
-        deliveryOption = option
-      }
-    })
+    let deliveryOption = getdeliveryOption(deliveryOptionId)
 
     productPriceCents += matchingItem.priceCents * item.quantity
     shippingPriceCents += deliveryOption.deliveryPriceCents
