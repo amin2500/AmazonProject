@@ -3,6 +3,7 @@ import {products,getproduct} from "../../data/products.js"
 import {deliveryOptions,getdeliveryOption} from "../../scripts/deliveryOptions.js"
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"
 import {renderPaymentSummary} from "../checkout/paymentSummary.js"
+import {formatCurrency} from "../../scripts/money.js"
 
 export function render(){
 let checkoutHtml = ''
@@ -36,7 +37,7 @@ cart.forEach((item)=>{
                   ${matchingItem.name}
                 </div>
                 <div class="product-price">
-                  $${(matchingItem.priceCents/100).toFixed(2)}
+                  $${(formatCurrency(matchingItem.priceCents))}
                 </div>
                 <div class="product-quantity">
                   <span>
