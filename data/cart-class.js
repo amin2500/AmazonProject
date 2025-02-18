@@ -1,14 +1,14 @@
 class Cart {
     cartItem = undefined
-    localStorageKey = undefined
+    #localStorageKey = undefined
 
 
     constructor(localStorageKey){
-        this.localStorageKey = localStorageKey
-        this.LoadFromStorage()
+        this.#localStorageKey = localStorageKey
+        this.#LoadFromStorage()
     }
-    LoadFromStorage(){
-        this.cartItem = JSON.parse(localStorage.getItem(this.localStorageKey)) || [{
+    #LoadFromStorage(){
+        this.cartItem = JSON.parse(localStorage.getItem(this.#localStorageKey)) || [{
           productId:`e43638ce-6aa0-4b85-b27f-e1d07eb678c6`,
           quantity:1,
           deliveryOptionId:`1`
@@ -19,7 +19,7 @@ class Cart {
       }]
       }
       SaveToStorage(){
-        localStorage.setItem(this.localStorageKey,JSON.stringify(this.cartItem))
+        localStorage.setItem(this.#localStorageKey,JSON.stringify(this.cartItem))
       }
 
       addToCart(productId){
@@ -94,8 +94,7 @@ let bussinessCart = new Cart(`cart-business`)
 
 
 
-cart.LoadFromStorage()
-bussinessCart.LoadFromStorage()
+
 
 console.log(cart)
 console.log(bussinessCart)
