@@ -1,8 +1,8 @@
-let data = new XMLHttpRequest()
+// let data = new XMLHttpRequest()
 
-data.addEventListener(`load`,()=>{
-    console.log(data.response)
-})
+// data.addEventListener(`load`,()=>{
+//     console.log(data.response)
+// })
 
-data.open(`GET`,`https://supersimplebackend.dev` )
-data.send()
+// data.open(`GET`,`https://supersimplebackend.dev` )
+// data.send()

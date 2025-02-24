@@ -1,9 +1,12 @@
-import {products} from "../data/products.js";
+import {products,loadProducts} from "../data/products.js";
 import {cart,addToCart,updateCartQuantity} from "../scripts/cart.js"
 import {formatCurrency} from "../scripts/money.js"
 
-let productsHtml = ''
+loadProducts(renderProudctsGrid) 
 
+
+function renderProudctsGrid(){
+  let productsHtml = ''
 products.forEach((product)=>{
     productsHtml+= `
      <div class="product-container">
@@ -88,3 +91,4 @@ forEach((button)=>{
    timeoutmessage = timeout
  })
 })
+}
