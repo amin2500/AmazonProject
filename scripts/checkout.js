@@ -5,15 +5,14 @@ import "../data/backend-practice.js"
 import {loadProductsFetch} from "../data/products.js"
 
 
-Promise.all([
-
-    loadProductsFetch(),
-
-   
-]).then(()=>{
+async function loadpage(){
+    await loadProductsFetch()
+ 
+    
     render()
-    renderPaymentSummary()
-})
+     renderPaymentSummary()
+ }
+ loadpage()
 
 
 
